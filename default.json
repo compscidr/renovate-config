@@ -1,12 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Baseline for all compscidr repos. Safe for any language.",
-  "extends": ["config:recommended"],
+  "extends": [
+    "config:recommended"
+  ],
   "packageRules": [
     {
       "description": "Automerge non-major updates",
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true
+    },
+    {
+      "description": "Never automerge majors, including in repos that set a broad top-level automerge. A breaking major that merges unattended lands on the default branch instead of surfacing as a failing PR.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
     }
   ]
 }
