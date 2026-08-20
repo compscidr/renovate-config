@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Android repos: baseline plus compileSdk tracking.",
+  "extends": ["github>compscidr/renovate-config"],
+  "customDatasources": {
+    "android-api-level": {
+      "description": "Latest released Android API level, from the endoflife.date android feed.",
+      "defaultRegistryUrlTemplate": "https://endoflife.date/api/android.json",
+      "transformTemplates": [
+        "{\"releases\": apiVersion.{\"version\": $}, \"homepage\": \"https://developer.android.com/tools/releases/platforms\"}"
+      ]
+    }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Keep compileSdk on the latest released API level so androidx bumps do not fail checkAarMetadata. Matches both Kotlin DSL (compileSdk = 37) and Groovy (compileSdk 37). Deliberately does not match minSdk or targetSdk: those change device compatibility and runtime behavior, and are a human decision.",
+      "managerFilePatterns": ["/build\\.gradle$/", "/build\\.gradle\\.kts$/"],
+      "matchStrings": ["compileSdk\\s*=?\\s*\"?(?<currentValue>\\d+)"],
+      "depNameTemplate": "android-compile-sdk",
+      "datasourceTemplate": "custom.android-api-level",
+      "versioningTemplate": "loose"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "compileSdk bumps get a human look, never automerge",
+      "matchDepNames": ["android-compile-sdk"],
+      "automerge": false
+    }
+  ]
+}

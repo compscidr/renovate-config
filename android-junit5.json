@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Android repos that run Jupiter instrumented tests via de.mannodermaus.junit5. Only extend this if the repo actually uses that runner.",
+  "extends": ["github>compscidr/renovate-config:android"],
+  "packageRules": [
+    {
+      "description": "Hold junit-bom on 5.x: the android-junit5 runner refuses to run Jupiter instrumented tests below API 35 on JUnit 6, which would drop on-device coverage for every device older than Android 15. Revisit when the device farm is all API 35+.",
+      "matchPackageNames": ["org.junit:junit-bom"],
+      "allowedVersions": "<6"
+    }
+  ]
+}
