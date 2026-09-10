@@ -5,8 +5,12 @@
     {
       "customType": "regex",
       "description": "Workflows that fetch the sair tools with actions/checkout of compscidr/sair at a release tag (repository: compscidr/sair followed by ref: vX.Y.Z).",
-      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
-      "matchStrings": ["repository:\\s*compscidr/sair\\s*\\n\\s*ref:\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"],
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "repository:\\s*compscidr/sair\\s*\\n\\s*ref:\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"
+      ],
       "depNameTemplate": "compscidr/sair",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver-coerced"
@@ -14,8 +18,25 @@
     {
       "customType": "regex",
       "description": "Gradle builds that download the sair protos and tools at a release (sairVersion=vX.Y.Z in gradle.properties).",
-      "managerFilePatterns": ["/(^|/)gradle\\.properties$/"],
-      "matchStrings": ["^sairVersion\\s*=\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"],
+      "managerFilePatterns": [
+        "/(^|/)gradle\\.properties$/"
+      ],
+      "matchStrings": [
+        "^sairVersion\\s*=\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"
+      ],
+      "depNameTemplate": "compscidr/sair",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver-coerced"
+    },
+    {
+      "customType": "regex",
+      "description": "Ansible roles that install sair on hosts (sair_version: \"vX.Y.Z\" in a role's defaults). A bump PR here is the signal that the host proxy/device-source is behind; the play still has to be run to deploy it.",
+      "managerFilePatterns": [
+        "/(^|/)defaults/main\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "sair_version:\\s*[\"']?(?<currentValue>v?\\d+\\.\\d+\\.\\d+)[\"']?"
+      ],
       "depNameTemplate": "compscidr/sair",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver-coerced"
@@ -24,7 +45,9 @@
   "packageRules": [
     {
       "description": "sair is pre-1.0, so every release is a patch bump; automerge them like any other patch.",
-      "matchDepNames": ["compscidr/sair"],
+      "matchDepNames": [
+        "compscidr/sair"
+      ],
       "automerge": true
     }
   ]
