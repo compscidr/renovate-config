@@ -9,7 +9,7 @@ Shared [Renovate](https://docs.renovatebot.com/) presets for compscidr repos.
 | `default.json` | `github>compscidr/renovate-config` | Any repo, any language |
 | `android.json` | `github>compscidr/renovate-config:android` | Android repos |
 | `android-junit5.json` | `github>compscidr/renovate-config:android-junit5` | Android repos using `de.mannodermaus.junit5` |
-| `sair.json` | `github>compscidr/renovate-config:sair` | Repos that pin a `compscidr/sair` release: `ref:` of a `compscidr/sair` checkout in workflows, or `sairVersion=` in `gradle.properties`. Extend alongside a language preset. |
+| `sair.json` | `github>compscidr/renovate-config:sair` | Repos that pin a `compscidr/sair` release: `ref:` of a `compscidr/sair` checkout in workflows, `sairVersion=` in `gradle.properties`, or `sair_version:` in an Ansible role's defaults. Extend alongside a language preset. |
 
 Each extends the one above it, so pick the most specific and you get the rest.
 

@@ -27,6 +27,19 @@
       "depNameTemplate": "compscidr/sair",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver-coerced"
+    },
+    {
+      "customType": "regex",
+      "description": "Ansible roles that install sair on hosts (sair_version: \"vX.Y.Z\" in a role's defaults). A bump PR here is the signal that the host proxy/device-source is behind; the play still has to be run to deploy it. Anchored to a line start via (?:^|\\n) (Renovate has no multiline mode, so a bare ^ only matches the first line) so proxy_sair_version: or a comment cannot match.",
+      "managerFilePatterns": [
+        "/(^|/)defaults/main\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "(?:^|\\n)sair_version:\\s*[\"']?(?<currentValue>v?\\d+\\.\\d+\\.\\d+)[\"']?"
+      ],
+      "depNameTemplate": "compscidr/sair",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver-coerced"
     }
   ],
   "packageRules": [
