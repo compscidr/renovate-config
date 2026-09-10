@@ -17,12 +17,12 @@
     },
     {
       "customType": "regex",
-      "description": "Gradle builds that download the sair protos and tools at a release (sairVersion=vX.Y.Z in gradle.properties).",
+      "description": "Gradle builds that download the sair protos and tools at a release (sairVersion=vX.Y.Z in gradle.properties). No ^ anchor: Renovate matches against the whole file without multiline mode, so ^ only ever matched the first line.",
       "managerFilePatterns": [
         "/(^|/)gradle\\.properties$/"
       ],
       "matchStrings": [
-        "^sairVersion\\s*=\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"
+        "(?:^|\\n)sairVersion\\s*=\\s*(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"
       ],
       "depNameTemplate": "compscidr/sair",
       "datasourceTemplate": "github-releases",
